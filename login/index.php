@@ -1,0 +1,97 @@
+<?php
+session_start();
+$status = isset($_GET['status']) ? htmlspecialchars($_GET['status']) : '';
+$error = isset($_GET['error']) ? htmlspecialchars($_GET['error']) : '';
+?>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - FinApp</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/auth.css">
+</head>
+<body>
+    <button id="nav-toggle-btn" class="nav-toggle-btn"><i class="fas fa-bars"></i></button>
+    <aside id="nav-panel" class="sidebar">
+        <div class="sidebar-header">
+            <h2 class="sidebar-title">FinApp</h2>
+            <button id="mobile-nav-close" class="nav-close-btn"><i class="fas fa-times"></i></button>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="/FinApp/login/" class="nav-link active"><i class="fas fa-sign-in-alt nav-icon"></i><span>Login</span></a>
+            <a href="/FinApp/register/" class="nav-link"><i class="fas fa-user-plus nav-icon"></i><span>Register</span></a>
+            <a href="https://tools-hlwall.fwh.is/" class="nav-link"><i class="fas fa-tools nav-icon"></i><span>HlwAll Tools</span></a>
+        </nav>
+    </aside>
+    <div id="nav-overlay" class="nav-overlay"></div>
+    <main id="main-content" class="main-content">
+        <div class="auth-card">
+            <h1>Login</h1>
+            <p class="subtitle">Silakan masuk untuk melanjutkan.</p>
+
+            <?php
+            if ($error == 'invalid_credentials') {
+                echo '<p style=" text-align: center; color: var(--brand-danger); margin-bottom: 1.5rem; font-size: 0.9rem;">Email atau password salah.</p>';
+            }
+            if ($status == 'unverified') {
+                echo '<p style=" text-align: center; color: var(--brand-danger); margin-bottom: 1.5rem; font-size: 0.9rem;">Akunmu belum diverifikasi. Kami telah mengirimkan ulang kode verifikasi ke emailmu.</p>';
+            }
+            if ($status == 'verified') {
+                echo '<p style=" text-align: center; color: #16a34a; margin-bottom: 1.5rem; font-size: 0.9rem;">Verifikasi berhasil! Silakan login.</p>';
+            }
+            ?>
+            
+            <a href="#" class="btn btn-github">
+                <i class="fab fa-github"></i> Masuk dengan GitHub
+            </a>
+
+            <div class="divider"><span>atau</span></div>
+            
+            <form class="login-form" action="../php_logic/auth.php" method="POST">
+                <input type="hidden" name="action" value="login">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" name="email" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" name="password" id="password" required>
+                </div>
+                <button id="login-btn" type="submit" class="btn">Login</button>
+            </form>
+        </div>
+    </main>
+    <script src="../js/loading.js"></script>
+    <script>
+    // Logika untuk Sidebar Mobile
+    document.addEventListener('DOMContentLoaded', function() {
+        const navPanel = document.getElementById('nav-panel');
+        const navToggleBtn = document.getElementById('nav-toggle-btn');
+        const navCloseBtn = document.getElementById('mobile-nav-close');
+        const navOverlay = document.getElementById('nav-overlay');
+
+        if (navToggleBtn) {
+            navToggleBtn.addEventListener('click', () => {
+                navPanel.classList.add('open');
+                navOverlay.style.display = 'block';
+            });
+        }
+        if (navCloseBtn) {
+            navCloseBtn.addEventListener('click', () => {
+                navPanel.classList.remove('open');
+                navOverlay.style.display = 'none';
+            });
+        }
+        if (navOverlay) {
+            navOverlay.addEventListener('click', () => {
+                navPanel.classList.remove('open');
+                navOverlay.style.display = 'none';
+            });
+        }
+    });
+    </script>
+</body>
+</html>
