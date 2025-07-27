@@ -24,6 +24,8 @@ $current_page = basename($_SERVER['PHP_SELF'], '.php');
             <a href="/FinApp/transactions/" class="nav-link <?php echo ($current_page == 'index' && strpos($_SERVER['REQUEST_URI'], 'transactions') !== false) ? 'active' : ''; ?>"><i class="fas fa-exchange-alt nav-icon"></i><span>Transaksi</span></a>
             <a href="/FinApp/accounts/" class="nav-link <?php echo ($current_page == 'index' && strpos($_SERVER['REQUEST_URI'], 'accounts') !== false) ? 'active' : ''; ?>"><i class="fas fa-wallet nav-icon"></i><span>Kelola Akun</span></a>
             <a href="/FinApp/categories/" class="nav-link <?php echo ($current_page == 'index' && strpos($_SERVER['REQUEST_URI'], 'categories') !== false) ? 'active' : ''; ?>"><i class="fas fa-tags nav-icon"></i><span>Kelola Kategori</span></a>
+            <a href="/FinApp/finai/" class="nav-link <?php echo ($current_page == 'index' && strpos($_SERVER['REQUEST_URI'], 'finai') !== false) ? 'active' : ''; ?>"><i class="fas fa-robot nav-icon"></i><span>FinAI</span></a>
+            <a href="/FinApp/tools/" class="nav-link <?php echo ($current_page == 'index' && strpos($_SERVER['REQUEST_URI'], 'tools') !== false) ? 'active' : ''; ?>"><i class="fas fa-tools nav-icon"></i><span>Tools</span></a>
         </nav>
         <div class="sidebar-footer">
             <a href="/FinApp/php_logic/logout.php" class="nav-link" style="background-color: #ffe8e8; color: #dc3545;"><i class="fas fa-sign-out-alt nav-icon"></i><span>Logout</span></a>
